@@ -6,7 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Satana! - Italian Bracelets</title>
 <?!= include('config'); ?> <?!= include('charms'); ?>
-
 <script>
 // Fallback para entorno local
 if (typeof CONFIG === 'undefined') {
@@ -14,19 +13,14 @@ document.write('<script src="config.js"><\/script>');
 document.write('<script src="charms.js"><\/script>');
 }
 </script>
-
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
-
 <style>
 /* --- ESTILOS GENERALES --- */
 :root {
-/* NUEVO COLOR PRIMARIO INTEGRADO */
 --primary-orange: #d73101;
 --bg-paper: #FFF8F0;
 --text-dark: #3E2723;
-
-/* Variables Dinámicas */
 --frame-w: 60px;
 --frame-h: 60px;
 --inner-w: 100%;
@@ -34,25 +28,21 @@ document.write('<script src="charms.js"><\/script>');
 --inner-left: 50%;
 --inner-top: 50%;
 }
-
 * {
 box-sizing: border-box;
 -webkit-tap-highlight-color: transparent;
 }
-
 body {
 font-family: 'Playfair Display', serif;
 background-color: var(--bg-paper);
 margin: 0;
 padding: 0;
-/* Ajuste para móviles: usar altura dinámica del viewport */
 height: 100vh;
 height: 100dvh;
 display: flex;
 flex-direction: column;
 overflow: hidden;
 }
-
 .app-container {
 width: 100%;
 height: 100%;
@@ -61,8 +51,7 @@ flex-direction: column;
 background-color: var(--bg-paper);
 animation: fadeIn 0.5s ease-in;
 }
-
-/* --- HEADER (Con Nuevo Color) --- */
+/* --- HEADER --- */
 .header {
 background-color: var(--primary-orange);
 color: white;
@@ -75,15 +64,12 @@ justify-content: space-between;
 align-items: center;
 height: 70px;
 }
-
 .header-branding {
 display: flex;
 align-items: center;
 gap: 15px;
 height: 100%;
 }
-
-/* LOGO: Integrado */
 .brand-logo {
 height: 70px;
 width: 70px;
@@ -94,8 +80,6 @@ padding: 0;
 background-color: transparent;
 display: none;
 }
-
-/* TEXTO SECUNDARIO */
 .subtitle {
 font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 font-size: 0.8rem;
@@ -107,7 +91,6 @@ opacity: 1;
 font-weight: 300;
 -webkit-font-smoothing: antialiased;
 }
-
 .price-display {
 font-family: sans-serif;
 font-size: 1.1rem;
@@ -118,7 +101,6 @@ border-radius: 20px;
 white-space: nowrap;
 margin: 0 10px;
 }
-
 .info-btn {
 width: 30px;
 height: 30px;
@@ -133,8 +115,7 @@ align-items: center;
 justify-content: center;
 padding: 0;
 }
-
-/* --- ZONA DE TRABAJO (Scroll Grueso) --- */
+/* --- ZONA DE TRABAJO --- */
 .workspace-section {
 flex-basis: 35%;
 min-height: 160px;
@@ -150,25 +131,20 @@ scroll-behavior: smooth;
 scrollbar-width: auto;
 scrollbar-color: var(--primary-orange) #e0e0e0;
 }
-
-/* Scrollbar Personalizada */
 .workspace-section::-webkit-scrollbar {
 height: 36px;
 background-color: #e0e0e0;
 }
-
 .workspace-section::-webkit-scrollbar-track {
 background-color: #e0e0e0;
 border-radius: 0;
 }
-
 .workspace-section::-webkit-scrollbar-thumb {
 background-color: var(--primary-orange);
 border-radius: 18px;
 border: 6px solid #e0e0e0;
 background-clip: content-box;
 }
-
 .workspace-section::before {
 content: "";
 position: absolute;
@@ -181,7 +157,6 @@ transform: translateY(-50%);
 z-index: 0;
 pointer-events: none;
 }
-
 #bracelet-zone {
 display: flex;
 align-items: center;
@@ -191,14 +166,12 @@ height: 100%;
 cursor: grab;
 z-index: 2;
 }
-
 /* --- CATÁLOGO --- */
 .catalog-section {
 flex-grow: 1;
 padding: 15px;
 overflow-y: auto;
 }
-
 .section-title {
 font-size: 0.85rem;
 color: #555;
@@ -209,14 +182,12 @@ font-weight: bold;
 border-bottom: 1px solid #d0d0d0;
 padding-bottom: 5px;
 }
-
 .catalog-grid {
 display: grid;
 grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
 gap: 12px;
 padding-bottom: 20px;
 }
-
 .charm-source {
 width: 100%;
 height: auto;
@@ -230,11 +201,9 @@ filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));
 display: block;
 transition: transform 0.1s;
 }
-
 .charm-source:active {
 transform: scale(0.95);
 }
-
 /* --- ESLABÓN (UI) --- */
 .charm-wrapper {
 position: relative;
@@ -248,23 +217,20 @@ user-select: none;
 touch-action: none;
 animation: slideIn 0.3s ease-out;
 }
-
 @keyframes slideIn {
-  from { 
+  from {
     opacity: 0;
     transform: translateY(20px);
   }
-  to { 
+  to {
     opacity: 1;
     transform: translateY(0);
   }
 }
-
 .sortable-ghost {
 opacity: 0.4;
 transform: scale(0.95);
 }
-
 .charm-img-layer {
 position: absolute;
 z-index: 1;
@@ -276,7 +242,6 @@ transform: translate(-50%, -50%);
 object-fit: contain;
 pointer-events: none;
 }
-
 .frame-layer {
 position: absolute;
 top: 0;
@@ -288,8 +253,7 @@ background-size: 100% 100%;
 background-repeat: no-repeat;
 pointer-events: none;
 }
-
-/* --- FOOTER (Ajustado para Móviles) --- */
+/* --- FOOTER --- */
 .footer-actions {
 padding: 12px 20px;
 background-color: #e0e0dc;
@@ -299,13 +263,9 @@ align-items: center;
 gap: 10px;
 border-top: 1px solid #ccc;
 flex-shrink: 0;
-
-/* CORRECCIÓN: Espacio seguro para iPhone/Android */
 padding-bottom: max(12px, env(safe-area-inset-bottom));
-/* CORRECCIÓN: Margen extra para flotar sobre la barra de navegación */
-margin-bottom: 5px; 
+margin-bottom: 5px;
 }
-
 button {
 padding: 10px 18px;
 border: none;
@@ -317,19 +277,16 @@ font-size: 0.72rem;
 text-transform: uppercase;
 box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-
 .btn-clear {
 background: transparent;
 color: #c62828;
 border: 1px solid #c62828;
 }
-
 .btn-action {
 background: var(--primary-orange);
 color: white;
-min-width: 110px;
+min-width: 100px;
 }
-
 .empty-msg {
 width: 100%;
 text-align: center;
@@ -338,7 +295,6 @@ font-style: italic;
 pointer-events: none;
 font-size: 0.9rem;
 }
-
 /* --- Loading Overlay --- */
 .loading-overlay {
 position: fixed;
@@ -356,7 +312,6 @@ opacity: 1;
 visibility: visible;
 transition: opacity 0.3s ease, visibility 0.3s ease;
 }
-
 .loading-spinner {
 width: 50px;
 height: 50px;
@@ -366,26 +321,22 @@ border-radius: 50%;
 animation: spin 1s linear infinite;
 margin-bottom: 20px;
 }
-
 @keyframes spin {
 0% { transform: rotate(0deg); }
 100% { transform: rotate(360deg); }
 }
-
 .loading-text {
 font-family: 'Playfair Display', serif;
 color: var(--primary-orange);
 font-size: 1.2rem;
 text-align: center;
 }
-
-/* --- Hidden class for loading state --- */
 .loading-hidden {
 opacity: 0;
 visibility: hidden;
 pointer-events: none;
 }
-
+/* --- MODALES --- */
 .modal-overlay {
 display: none;
 position: fixed;
@@ -399,7 +350,6 @@ align-items:center;
 justify-content:center;
 backdrop-filter:blur(3px);
 }
-
 .modal-content {
 background:var(--bg-paper);
 width:90%;
@@ -410,7 +360,6 @@ border:2px solid var(--primary-orange);
 text-align:center;
 position:relative;
 }
-
 .modal-close {
 position:absolute;
 top:10px;
@@ -420,33 +369,156 @@ background:none;
 font-size:1.5rem;
 cursor:pointer;
 }
+/* --- FULLSCREEN VIEW MODAL (REORGANIZADO 3 COLUMNAS) --- */
+.view-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    background: #000;
+    z-index: 3000;
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+.view-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+.view-modal-header {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    z-index: 3001;
+    background: rgba(0,0,0,0.5);
+    position: relative;
+    flex-shrink: 0;
+    height: 56px;
+}
+.view-modal-header-left,
+.view-modal-header-right {
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.view-modal-header-center {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+}
+.view-modal-header-title {
+    margin: 0;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+.view-modal-header button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    padding: 5px;
+    cursor: pointer;
+    line-height: 1;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.view-modal-header button.btn-download {
+    padding: 8px 12px;
+    font-size: 0.72rem;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: white;
+    color: var(--primary-orange);
+    border-radius: 20px;
+    min-width: 85px;
+    letter-spacing: 0.5px;
+}
+.view-modal-body {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background: #fff;
+    overflow: hidden;
+    position: relative;
+}
+.view-modal-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 4px;
+}
+/* Footer eliminado - ya no se muestra */
+/* --- INSTRUCTION MODAL --- */
+#info-modal .modal-content {
+    position: relative;
+    max-height: 80vh;
+    overflow-y: auto;
+}
 </style>
 </head>
 <body>
-
 <div id="loading-overlay" class="loading-overlay">
   <div class="loading-spinner"></div>
   <div class="loading-text">Cargando aplicación...</div>
 </div>
-
 <div id="info-modal" class="modal-overlay">
 <div class="modal-content">
 <button class="modal-close" onclick="toggleModal()">×</button>
-
 <div style="font-size: 1.2rem; color: var(--primary-orange); margin-bottom:15px;">Instrucciones</div>
-
 <div style="font-family:sans-serif; font-size:0.9rem; line-height:1.6; text-align: left; padding: 0 10px;">
 1- Personalizar tu pulsera<br>
-2- Descargar diseño<br>
-3- Enviar a <a href="https://instagram.com/Satana.IB" target="_blank" style="color: var(--primary-orange); font-weight:bold; text-decoration:none;">@Satana.IB</a> (instagram) para realizar tu pedido!<br><br>
+2- Presiona "Visualizar" para ver el diseño completo<br>
+3- Envía a <a href="https://instagram.com/Satana.IB" target="_blank" style="color: var(--primary-orange); font-weight:bold; text-decoration:none;">@Satana.IB</a> para realizar tu pedido!<br><br>
 <hr style="border:0; border-top:1px solid #ddd; margin: 15px 0;">
 <div style="text-align: center;"> Precio base: <span id="modal-empty-price" style="font-weight:bold;"></span><br> Precio charm: <span id="modal-charm-price" style="font-weight:bold;"></span> </div>
 </div>
-
 <button class="btn-action" onclick="toggleModal()" style="width:100%; margin-top:20px;">OK</button>
 </div>
 </div>
-
+<!-- MODAL DE VISUALIZACIÓN (SOLO DESCARGAR EN HEADER) -->
+<div id="view-modal" class="view-modal-overlay">
+    <div class="view-modal-header">
+        <div class="view-modal-header-left">
+            <button onclick="closeViewModal()">×</button>
+        </div>
+        <div class="view-modal-header-center">
+            <h2 class="view-modal-header-title">VISTA PREVIA</h2>
+        </div>
+        <div class="view-modal-header-right">
+            <button id="btn-download-from-header" class="btn-download">DESCARGAR</button>
+        </div>
+    </div>
+    <div class="view-modal-body">
+        <img id="view-img" class="view-modal-img" src="" alt="Vista previa pulsera">
+    </div>
+</div>
 <div class="app-container">
 <div class="header">
 <div class="header-branding">
@@ -455,61 +527,49 @@ cursor:pointer;
 <div class="subtitle">Italian Bracelets</div>
 </div>
 </div>
-
 <div style="display:flex; align-items:center;">
 <div class="price-display" id="total-price">$0</div>
 <button class="info-btn" onclick="toggleModal()">i</button>
 </div>
 </div>
-
 <section class="workspace-section" id="scroll-container">
 <div id="bracelet-zone">
 <div class="empty-msg" id="empty-text">Pulsera vacía</div>
+</div>
 </section>
-
 <section class="catalog-section">
 <div class="section-title">Catálogo</div>
 <div class="catalog-grid" id="catalog-container"></div>
 </section>
-
 <div class="footer-actions">
 <button class="btn-clear" id="btn-clear">Limpiar</button>
 <div style="display:flex; gap:8px;">
 <button class="btn-action" id="btn-share" style="display:none; background:#1e88e5;">Compartir</button>
-<button class="btn-action" id="btn-save">Descargar</button>
+<button class="btn-action" id="btn-view">Visualizar</button>
 </div>
 </div>
 </div>
-
 <script>
 function getEmptyPrice() {
 if (typeof CONFIG === 'undefined') return 0;
 return CONFIG.emptycharmPrice || CONFIG.charmPrice || 0;
 }
-
 let zone, catalogContainer, totalPriceDisplay;
-
-// Mostrar loading overlay al inicio
+let currentCanvas = null;
+let currentCanvasRotated = null;
 document.addEventListener('DOMContentLoaded', () => {
   if (typeof CONFIG === 'undefined') return;
-  
-  // Iniciar carga inmediatamente
   initApp();
 });
-
 function initApp() {
 zone = document.getElementById('bracelet-zone');
 catalogContainer = document.getElementById('catalog-container');
 totalPriceDisplay = document.getElementById('total-price');
-
-// Logo & Branding
 const logoImg = document.getElementById('app-logo');
 if (CONFIG.LOGO && CONFIG.LOGO.trim() !== "") {
 logoImg.src = CONFIG.LOGO;
 logoImg.style.display = "block";
 }
-
-// Info Modal
 const emptyP = getEmptyPrice();
 const charmP = CONFIG.charmPrice || 0;
 const cur = CONFIG.currency || '$';
@@ -517,11 +577,8 @@ const modalEmpty = document.getElementById('modal-empty-price');
 const modalCharm = document.getElementById('modal-charm-price');
 if(modalEmpty) modalEmpty.innerText = `${cur}${emptyP}`;
 if(modalCharm) modalCharm.innerText = `${cur}${charmP}`;
-
-// Config CSS
 const root = document.documentElement;
 const h = 65;
-
 const r = CONFIG.render.frameWidth / CONFIG.render.frameHeight;
 root.style.setProperty('--frame-h', `${h}px`);
 root.style.setProperty('--frame-w', `${h * r}px`);
@@ -529,7 +586,6 @@ root.style.setProperty('--inner-w', `${CONFIG.render.scaleX * 100}%`);
 root.style.setProperty('--inner-h', `${CONFIG.render.scaleY * 100}%`);
 root.style.setProperty('--inner-left', `${(0.5 + CONFIG.render.moveX) * 100}%`);
 root.style.setProperty('--inner-top', `${(0.5 + CONFIG.render.moveY) * 100}%`);
-
 if (typeof Sortable !== 'undefined') {
 new Sortable(zone, {
 animation: 150,
@@ -538,16 +594,12 @@ filter: '.empty-msg',
 onEnd: updateTotal
 });
 }
-
 if (navigator.share) {
 const btnShare = document.getElementById('btn-share');
 if(btnShare) btnShare.style.display = 'block';
 }
-
 initCatalog();
 updateTotal();
-
-// Ocultar loading overlay después de inicializar
 setTimeout(() => {
 const loadingOverlay = document.getElementById('loading-overlay');
 if (loadingOverlay) {
@@ -558,42 +610,32 @@ loadingOverlay.style.display = 'none';
 }
 }, 800);
 }
-
 function initCatalog() {
 if (typeof CHARMS_DB === 'undefined' || !catalogContainer) return;
 const fragment = document.createDocumentFragment();
 CHARMS_DB.forEach((charm, index) => {
 const img = document.createElement('img');
 img.src = charm.src;
-
 img.className = 'charm-source';
 img.loading = "lazy";
 const isSpecial = (index === 0);
 img.onclick = () => addCharm(charm, isSpecial);
-
 fragment.appendChild(img);
 });
 catalogContainer.appendChild(fragment);
 }
-
 function addCharm(charmObj, isSpecialType) {
 const emptyText = document.getElementById('empty-text');
 if(emptyText) emptyText.style.display = 'none';
-
 const wrapper = document.createElement('div');
 wrapper.className = 'charm-wrapper';
-
 const thisPrice = isSpecialType ? getEmptyPrice() : CONFIG.charmPrice;
 wrapper.dataset.price = thisPrice;
-
 if (isSpecialType) wrapper.dataset.type = "special";
-
 const safeFrames = (typeof FRAMES !== 'undefined') ? FRAMES : { DEFAULT: '', FIRST: '' };
 let frameUrl = safeFrames.DEFAULT;
 if (isSpecialType && safeFrames.FIRST) frameUrl = safeFrames.FIRST;
-
 wrapper.innerHTML = `<img src="${charmObj.src}" class="charm-img-layer"><div class="frame-layer" style="background-image: url('${frameUrl}')"></div>`;
-
 wrapper.onclick = function() {
 if(confirm("¿Eliminar este adorno?")) {
 this.style.opacity = '0';
@@ -605,11 +647,8 @@ checkEmpty();
 }, 150);
 }
 };
-
 zone.appendChild(wrapper);
 updateTotal();
-
-// Auto-scroll al final (Contenedor)
 setTimeout(() => {
 const scroller = document.getElementById('scroll-container');
 if(scroller) {
@@ -617,13 +656,11 @@ scroller.scrollTo({ left: scroller.scrollWidth, behavior: 'smooth' });
 }
 }, 50);
 }
-
 function checkEmpty() {
 const count = zone.querySelectorAll('.charm-wrapper').length;
 const emptyText = document.getElementById('empty-text');
 if(count === 0 && emptyText) emptyText.style.display = 'block';
 }
-
 function updateTotal() {
 if(!zone) return;
 const wrappers = zone.querySelectorAll('.charm-wrapper');
@@ -636,7 +673,6 @@ if(totalPriceDisplay) {
 totalPriceDisplay.innerText = `${CONFIG.currency}${total.toLocaleString()}`;
 }
 }
-
 // --- GENERADOR CANVAS ---
 async function generateCanvas() {
 const wrappers = zone.querySelectorAll('.charm-wrapper');
@@ -652,7 +688,6 @@ const overlap = itemW * 0.025;
 const totalW = (wrappers.length * itemW) - (wrappers.length - 1) * overlap;
 canvas.width = Math.max(800, totalW + 100);
 canvas.height = itemH + 300;
-
 ctx.fillStyle = "#ffffff";
 ctx.fillRect(0,0, canvas.width, canvas.height);
 const startX = (canvas.width - totalW) / 2;
@@ -660,7 +695,6 @@ const startY = (canvas.height - itemH) / 2;
 const safeFrames = (typeof FRAMES !== 'undefined') ? FRAMES : { DEFAULT: '' };
 const frameDefaultImg = await loadImage(safeFrames.DEFAULT);
 const frameFirstImg = (safeFrames.FIRST) ? await loadImage(safeFrames.FIRST) : frameDefaultImg;
-
 for(let i=0; i<wrappers.length; i++) {
 const wrapper = wrappers[i];
 const charmImg = await loadImage(wrapper.querySelector('.charm-img-layer').src);
@@ -679,8 +713,6 @@ if(charmImg) drawImageProp(ctx, charmImg, chX, chY, chW, chH);
 if(frameToUse) ctx.drawImage(frameToUse, x, y, itemW, itemH);
 ctx.shadowColor = "transparent";
 }
-
-// BRANDING (Color Canvas Fijo)
 const textY = 80;
 ctx.textAlign = "center";
 if (CONFIG.LOGO && CONFIG.LOGO.trim() !== "") {
@@ -693,14 +725,22 @@ ctx.drawImage(logoImg, (canvas.width/2) - (logoSize/2), textY - 70, logoSize, lo
 ctx.fillStyle = "#333";
 ctx.font = "300 24px Helvetica Neue, Helvetica, sans-serif";
 ctx.fillText("ITALIAN BRACELETS", canvas.width/2, textY + 30);
-
-ctx.font = "bold 30px sans-serif";
 const priceText = totalPriceDisplay ? totalPriceDisplay.innerText : "$0";
 ctx.fillText(`Total: ${priceText}`, canvas.width/2, canvas.height - 40);
 return canvas;
 }
-
-// Helpers & Listeners
+// --- ROTAR CANVAS 90° (para visualización vertical) ---
+function rotateCanvas90Degrees(canvas) {
+    const rotatedCanvas = document.createElement('canvas');
+    const ctx = rotatedCanvas.getContext('2d');
+    rotatedCanvas.width = canvas.height;
+    rotatedCanvas.height = canvas.width;
+    ctx.translate(rotatedCanvas.width / 2, rotatedCanvas.height / 2);
+    ctx.rotate(90 * Math.PI / 180);
+    ctx.drawImage(canvas, -canvas.width / 2, -canvas.height / 2);
+    return rotatedCanvas;
+}
+// Helpers
 function loadImage(src) {
 return new Promise((res, rej) => {
 if(!src) {
@@ -708,7 +748,6 @@ console.warn("Intentando cargar imagen vacía");
 res(null);
 return;
 }
-
 const i = new Image();
 i.crossOrigin="anonymous";
 i.onload = () => {
@@ -717,54 +756,72 @@ res(i);
 };
 i.onerror = (error) => {
 console.warn("Error cargando imagen:", src, error);
-// Devolver null en lugar de rechazar para evitar errores
 res(null);
 };
 i.src = src;
 });
 }
-
 function drawImageProp(ctx, img, x, y, w, h) {
 const r = Math.min(w / img.width, h / img.height);
 ctx.drawImage(img, x + (w - img.width * r)/2, y + (h - img.height * r)/2, img.width * r, img.height * r);
 }
-
+// --- LÓGICA DEL MODAL DE VISUALIZACIÓN ---
+function openViewModal(canvas) {
+    currentCanvas = canvas;
+    currentCanvasRotated = rotateCanvas90Degrees(canvas);
+    const img = document.getElementById('view-img');
+    img.src = currentCanvasRotated.toDataURL('image/jpeg', 0.9);
+    const modal = document.getElementById('view-modal');
+    modal.style.display = 'flex';
+    setTimeout(() => modal.classList.add('active'), 10);
+}
+function closeViewModal() {
+    const modal = document.getElementById('view-modal');
+    modal.classList.remove('active');
+    setTimeout(() => modal.style.display = 'none', 300);
+}
 window.toggleModal = () => {
 const m = document.getElementById('info-modal');
 if(m) m.style.display = (m.style.display === 'flex') ? 'none' : 'flex';
 };
-
 document.getElementById('btn-clear').onclick = () => {
 if(confirm("¿Limpiar toda la pulsera?")) {
 zone.innerHTML = '<div class="empty-msg" id="empty-text">Pulsera vacía</div>';
 updateTotal();
 }
 };
-
-document.getElementById('btn-save').onclick = async function() {
+// ==========================================
+// 👁️ BOTÓN VISUALIZAR
+// ==========================================
+document.getElementById('btn-view').onclick = async function() {
 const btn = this;
 const oldText = btn.innerText;
-btn.innerHTML = '<span class="loading-spinner"></span> Generando...';
+btn.innerText = 'Cargando...';
 btn.disabled = true;
-
 try {
-const canvas = await generateCanvas();
-if(canvas) {
-const link = document.createElement('a');
-link.download = `Diseño_${Date.now()}.jpg`;
-link.href = canvas.toDataURL('image/jpeg', 0.9);
-link.click();
-}
+    const canvas = await generateCanvas();
+    if(canvas) {
+        openViewModal(canvas);
+    }
 } catch(e) {
 console.error(e);
-alert("Error al generar la imagen. Por favor, inténtalo de nuevo.");
+alert("Error al procesar el diseño. Por favor, inténtalo de nuevo.");
 } finally {
-btn.innerHTML = oldText;
-btn.disabled = false;
+    btn.innerText = oldText;
+    btn.disabled = false;
 }
 };
-
-// CORRECCIÓN DEFINITIVA DEL BOTÓN COMPARTIR
+// Descargar desde header
+document.getElementById('btn-download-from-header').onclick = function() {
+    if(!currentCanvas) return;
+    const link = document.createElement('a');
+    link.download = `Diseño_${Date.now()}.jpg`;
+    link.href = currentCanvas.toDataURL('image/jpeg', 0.9);
+    link.click();
+};
+// ==========================================
+// 📤 BOTÓN COMPARTIR
+// ==========================================
 const btnShare = document.getElementById('btn-share');
 if(btnShare) {
 btnShare.onclick = async function() {
@@ -772,51 +829,38 @@ const btn = this;
 const oldText = btn.innerText;
 btn.innerText = "...";
 btn.disabled = true;
-
 try {
     const canvas = await generateCanvas();
     if(canvas) {
-        // Convertimos toBlob en una Promesa para poder usar await y finally de manera segura
         const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.9));
-        
         if (blob) {
             const file = new File([blob], "diseño_pulsera.jpg", { type: "image/jpeg" });
-            
             if (navigator.canShare && navigator.canShare({ files: [file] })) {
                 try {
-                    await navigator.share({ 
-                        files: [file], 
-                        title: CONFIG.brandName || 'Mi Diseño', 
-                        text: '¡Mira la pulsera que diseñé!' 
+                    await navigator.share({
+                        files: [file],
+                        title: CONFIG.brandName || 'Mi Diseño',
+                        text: '¡Mira la pulsera que diseñé!'
                     });
                 } catch(shareErr) {
-                    // Atrapa si el usuario cancela la ventana de compartir nativa
                     console.log("Acción de compartir cancelada o falló:", shareErr);
                 }
             } else {
-                alert("Tu dispositivo no soporta compartir directamente. Usa Descargar para guardar el diseño.");
-                const link = document.createElement('a');
-                link.download = `Diseño_${Date.now()}.jpg`;
-                link.href = canvas.toDataURL('image/jpeg', 0.9);
-                link.click();
+                alert("Tu dispositivo no soporta compartir directamente. Usa Visualizar y luego Guarda.");
             }
         }
     }
 } catch(err) {
     console.error("Error crítico en share:", err);
-    alert("Error al compartir. Por favor, inténtalo de nuevo o usa Descargar.");
+    alert("Error al compartir. Por favor, inténtalo de nuevo.");
 } finally {
-    // Este bloque finally asegura que SIEMPRE se devuelva el botón a su estado normal
     btn.innerText = oldText;
     btn.disabled = false;
 }
-
 };
 }
-
-// Añadir clase para responsive en móvil
+// Ajustes responsive
 document.addEventListener('DOMContentLoaded', function() {
-// Ajustar el texto del subtitle en móviles
 const subtitle = document.querySelector('.subtitle');
 if (window.innerWidth <= 480) {
 subtitle.style.whiteSpace = 'normal';
