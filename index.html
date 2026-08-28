@@ -1328,7 +1328,7 @@ DESIGNS_DB.forEach((design) => {
 const charms = (design && design.charms) ? design.charms : [];
 if (charms.length === 0) return;
 // Precio: primer dije = broche especial (emptyP), el resto a charmP.
-const price = emptyP + Math.max(0, charms.length - 1) * charmP;
+const price = 32000;
 
 const card = document.createElement('div');
 card.className = 'design-card';
